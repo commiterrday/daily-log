@@ -19,7 +19,8 @@ def alljson(request):
     #    p['time'] = str(p['time']) # TODO: avoid losing the TZ
 
     # Security concerns: is JSON/Array [1] an issue with the nested array? Note this isn't
-    # an issue with EcmaScript 5, according to the Django docs [2].
+    # an issue with EcmaScript 5, according to the Django docs [2]. See also [3].
     # [1] http://incompleteness.me/blog/2007/03/05/json-is-not-as-safe-as-people-think-it-is/
     # [2] https://docs.djangoproject.com/en/1.7/ref/request-response/#serializing-non-dictionary-objects
+    # [3] http://stackoverflow.com/questions/16289894/is-json-hijacking-still-an-issue-in-modern-browsers
     return JsonResponse({'points': points })
