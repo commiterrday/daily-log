@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Time</td>
+    <th>Weight (kg)</td>
+    <th>Body fat (%)</td>
+  </tr>
+  {% for point in points %}
+    <tr>
+      <td>{{ point.time | date:'Y-m-d H:i e (D)'}}</td>
+      <td>{{ point.kg }}</td>
+      <td>{{ point.body_fat }}</td>
+    </tr>
+  {% endfor %}
+</table>
