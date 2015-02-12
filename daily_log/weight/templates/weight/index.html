@@ -16,13 +16,30 @@
         var data = google.visualization.arrayToDataTable([
           ['Time', 'Weight (kg)', 'Body Fat %'],
           {% for point in points %}
-            ['{{ point.time | date:'Y, m, d'}}', {{ point.kg }}, {{ point.body_fat }}],
+            [ new Date( {{ point.time | date:'Y'}}
+                     , {{ point.time | date:'m' | add:"-1" }}
+                     , {{point.time | date:'d'}})
+            , {{ point.kg }}
+            , {{ point.body_fat }}
+            ],
           {% endfor %}
         ]);
 
         var options = {
           title: 'Datapoints',
           curveType: 'function',
+          series: {
+            0: {targetAxisIndex: 0},
+            1: {targetAxisIndex: 1}
+          },
+          vAxes: {
+            0: {title: 'Weight (kg)'},
+            1: {title: 'Body fat %'}
+          },
+          trendlines: {
+            0: { type: 'polynomial', degree: 3},
+            1: { type: 'polynomial', degree: 3}
+          },
           legend: { position: 'bottom' }
         };
 
