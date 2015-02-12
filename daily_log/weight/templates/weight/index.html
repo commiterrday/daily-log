@@ -1,14 +1,38 @@
-<table>
-  <tr>
-    <th>Time</td>
-    <th>Weight (kg)</td>
-    <th>Body fat (%)</td>
-  </tr>
-  {% for point in points %}
-    <tr>
-      <td>{{ point.time | date:'Y-m-d H:i e (D)'}}</td>
-      <td>{{ point.kg }}</td>
-      <td>{{ point.body_fat }}</td>
-    </tr>
-  {% endfor %}
-</table>
+<html>
+  <head>
+    <script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+
+    <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'Weight (kg)', 'Body Fat %'],
+          {% for point in points %}
+            ['{{ point.time | date:'Y, m, d'}}', {{ point.kg }}, {{ point.body_fat }}],
+          {% endfor %}
+        ]);
+
+        var options = {
+          title: 'Datapoints',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  </body>
+</html>
