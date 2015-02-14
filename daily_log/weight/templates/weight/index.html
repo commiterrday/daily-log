@@ -1,4 +1,4 @@
-<html>
+<html ng-app>
   <head>
     <script type="text/javascript"
           src="https://www.google.com/jsapi?autoload={
@@ -50,6 +50,16 @@
     </script>
   </head>
   <body>
+    <h1>Weight and body fat data</h1>
+
+    {% verbatim %}
+    <h2>AngularJS says 2 + 2 = {{ 2 + 2 }}</h2>
+    {% endverbatim %}
+
     <div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
+    </script>
   </body>
 </html>
